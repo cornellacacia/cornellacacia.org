@@ -1,0 +1,36 @@
+<html>
+<head>
+<script type="text/javascript">
+
+var Intervals = [4, 4, 4, 4, 4, 7, 4, 4, 4, 9, 7, 7, 7, 20, 51, 4, 8, 4, 50, 4, 4, 4, 17, 7, 4, 4, 7, 4, 10, 11];
+
+function calcTimes(numPlayers)
+{
+    var overflow = numPlayers > 30;
+    if (overflow) numPlayers = 30;
+    var DrinkTimes = [];
+    var results = document.getElementById("results");
+    results.innerHTML = "";
+    for (var i = 0; i < numPlayers; ++i)
+    {
+        DrinkTimes.push(0);
+        for (var j = i; j < Intervals.length; j += numPlayers)
+        {
+            DrinkTimes[i] += Intervals[j];
+        }
+        results.innerHTML += "Player " + (i+1) + " will drink for " + DrinkTimes[i] + " seconds.<br/>";
+    }
+    if (overflow) results.innerHTML += "No one else drinks.<br/>"
+}
+
+</script>
+</head>
+<body>
+  <h1>Acacia Thunderstruck Calculator</h1>
+  <form onsubmit="calcTimes(parseInt(document.getElementById('np').value, 10)); return false;">
+  Number of Players:<br/> <input type="text" id="np"/>
+  <input type="submit" value="Calculate"/>
+  </form>
+  <div id="results"></div>
+</body>
+</html>
